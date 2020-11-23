@@ -47,7 +47,7 @@ module Covid19
         puts "Here is the Covid data for #{continents[continent - 1]}:"
         puts ''
          continent_data(continent)
-       
+     
       else
         puts 'Enter a number between 1 - 6'
     
@@ -63,6 +63,15 @@ module Covid19
       cont.each do |c|
         puts "Total Cases #{c.cases}"
         puts "Total deaths #{c.deaths}"
+        puts "Total recovered #{c.recovered}"
+        puts ''
+        puts ''
+        puts "Total Countries : "
+        puts ''
+        countries(continent)
+
+        puts 'Would you like to Pick a country? Enter a number to get Covid data '
+        country = gets.strip.to_i
         puts ''
         
       end
@@ -73,17 +82,31 @@ module Covid19
       @input = gets.strip.downcase
     end
 
+    def countries(continent)
+      
+      cont = Covid19::Continent.find_by_continent(continents[continent - 1]).collect do |c|
+        puts c.countries
+      end
+      
+
+    end
+
     def continue
       if @input == 'y'
         menu 
-      else @input == 'n' && @input == 'exit'
-        puts "Thank you and stay safe!"
+      elsif @input != 'n' && @input != 'exit'
+        puts 'Please enter n for No or exit to Exit'
+        menu
+      else 
+        puts "Thank you and stay safe"
+        
       end
+      
     end
 
     def prompt
       puts ''
-      puts 'Enter a number to choose a "Continent" or "exit" to Exit'
+      puts 'Enter a number to choose a "Continent" '
       puts ''
      
     end 
