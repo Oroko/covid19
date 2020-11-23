@@ -20,7 +20,7 @@ module Covid19
     end
 
     def self.find_by_continent(continent)
-      all.select { |c| c.continent = continent }
+      all.select { |c| c.continent == continent }
     end
   end
 end
