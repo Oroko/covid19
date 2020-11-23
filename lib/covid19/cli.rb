@@ -1,19 +1,25 @@
 module Covid19
   class CLI
-    def menu
+    def start
       puts 'Welcome to the Covid19 CLI App'
       puts '______________________________'
       puts ''
       puts 'Here is a list of Continents'
       puts ''
-      Covid19::API.fetch_continent_data
-
-      continent_list
-      prompt
+      Covid19::API.fetch_continent_data 
 
      
-      chosen_continent
+      menu
       
+    end
+
+    def menu
+      continent_list
+      prompt
+      chosen_continent
+      continue
+      
+
     end
 
     def continents
@@ -24,7 +30,7 @@ module Covid19
       
     end
     
-    
+   
 
     def continent_list 
       continents.each.with_index(1) do |c, i|
@@ -35,15 +41,20 @@ module Covid19
     def chosen_continent
       continent = gets.strip.to_i
       
-      puts "You have chosen #{continents[continent - 1]}"
+     
       if continent.between?(1, continents.length)
-        puts "#{continents[continent - 1]} has:"
+        puts "You have chosen #{continents[continent - 1]}"
+        puts "Here is the Covid data for #{continents[continent - 1]}:"
         puts ''
          continent_data(continent)
        
       else
         puts 'Enter a number between 1 - 6'
+    
+
       end
+      
+     
 
     end
 
@@ -52,15 +63,31 @@ module Covid19
       cont.each do |c|
         puts "Total Cases #{c.cases}"
         puts "Total deaths #{c.deaths}"
+        puts ''
+        
       end
-     # binding.pry
+      #binding.pry
       #continents[continent -1]
       #binding.pry
+      puts 'Would you like to continue y/n'
+      @input = gets.strip.downcase
+    end
+
+    def continue
+      if @input == 'y'
+        menu 
+      else @input == 'n' && @input == 'exit'
+        puts "Thank you and stay safe!"
+      end
     end
 
     def prompt
       puts ''
-      puts 'Enter a number to choose a "Continent" or "exit" to Exit the app'
-    end
+      puts 'Enter a number to choose a "Continent" or "exit" to Exit'
+      puts ''
+     
+    end 
+
+    
   end
 end
