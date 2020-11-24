@@ -4,7 +4,6 @@ module Covid19
   class Continent
     @@all = []
 
-    # attr_accessor :continent, :cases, :deaths
 
     def initialize(attr_hash)
       attr_hash.each do |key, value|
@@ -16,7 +15,6 @@ module Covid19
 
     def self.all
       @@all
-      # binding.pry
     end
 
     def self.find_by_continent(continent)
