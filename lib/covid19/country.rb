@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Covid19
-  class Continent
+  class Country
     @@all = []
 
     # attr_accessor :continent, :cases, :deaths
@@ -19,8 +19,8 @@ module Covid19
       # binding.pry
     end
 
-    def self.find_by_continent(continent)
-      all.find { |c| c.continent == continent }
+    def self.find_by_country(country)
+      all.find { |c| c.country == country }
     end
   end
 end
